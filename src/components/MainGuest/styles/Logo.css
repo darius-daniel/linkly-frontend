@@ -1,0 +1,16 @@
+.logo {
+    font-size: 37px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+.gradient-text {
+    font-weight: bolder;
+    background: radial-gradient(circle, #EB568E, #144EE3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
