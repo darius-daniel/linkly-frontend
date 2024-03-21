@@ -1,0 +1,29 @@
+.link-table {
+    width: 95%;
+    margin: auto;
+
+    border-spacing: 0 3px;
+    text-align: left;
+}
+
+thead {
+    background-color: #181E29;
+}
+
+
+th, td {
+    border: none;
+    padding: 1rem;
+}
+
+th {
+    font-size: 15px;
+    font-weight: bolder;
+    border: none;
+}
+
+td {
+    font-size: 13px;
+    background-color: rgba(28, 40, 63, 0.2);
+}
+

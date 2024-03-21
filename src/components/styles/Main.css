@@ -1,0 +1,14 @@
+.centered {
+    display: block;
+    margin: auto;
+    margin: 3em 0;
+}
+
+.p1 {
+    font-size: 16px;
+}
+
+.p2 {
+    font-size: 14px;
+    margin-bottom: 3em;
+}

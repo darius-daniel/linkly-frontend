@@ -1,6 +1,7 @@
 .input-bar {
     width: 580px;
     position: relative;
+    left: 24%;
 }
 
 #link-input {
