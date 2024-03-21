@@ -13,10 +13,11 @@
 
   background-color: #0B101B;
   background-image: url('./assets/cubes.svg'), url('./assets/swirl.png');
-  background-size: contain, contain;
-  background-position-x: center, center;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  background-size: 160vw 130vh, 100vw 130vh;
+  background-position-y: -75px, center;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 body {
