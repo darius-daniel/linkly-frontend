@@ -1,0 +1,6 @@
+.gradient-text {
+    background: -webkit-radial-gradient(#EB568E, #144EE3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
