@@ -1,10 +1,10 @@
 import './App.css';
-import InputBar from './components/InputBar';
+import Header from './components/Header';
 
 function App() {
   return (
     <>
-      <InputBar />
+      <Header />
     </>
   );
 }

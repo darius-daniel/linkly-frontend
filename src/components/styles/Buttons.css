@@ -11,11 +11,23 @@
     color: #FFF;
 }
 
+.btn-primary:hover {
+    background-color: #0041e6;
+}
+
 .btn-secondary {
     background-color: #181E29;
     color: #FFF;
 }
 
+.btn-secondary:hover {
+    background-color: #202531;
+}
+
 .btn-pill {
     border-radius: 25px;
+}
+
+.btn-shadow {
+    box-shadow: 10px 5px 5px rgba(20, 78, 227, 0.4);
 }
