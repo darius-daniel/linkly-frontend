@@ -1,0 +1,30 @@
+.text-gradient {
+    background: -webkit-radial-gradient(#EB568E, #144EE3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-primary-blue {
+    color: #144EE3
+}
+
+.text-primary-pink {
+    color: #EB568E;
+}
+
+.text-lite {
+    color: #C9CED6
+}
+
+.text-grey {
+    color: #181E29;
+}
+
+.text-white {
+    color: #FFFFFF;
+}
+
+.text-black {
+    color: #0B101B;
+}

@@ -1,0 +1,28 @@
+.input-bar {
+    width: 580px;
+    position: relative;
+}
+
+#link-input {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 80px;
+    border: 3px solid #353C4A;
+    border-radius: 35px;
+
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.btn-embed {
+    position: absolute;
+    top: 7px;
+    right: -82px;
+}
+
+.text-embed {
+    position: absolute;
+    bottom: 23px;
+    left: 30px;
+}

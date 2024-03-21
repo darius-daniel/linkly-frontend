@@ -1,11 +1,10 @@
 import './App.css';
-
-import GradientText from './components/GradientText';
+import InputBar from './components/InputBar';
 
 function App() {
   return (
     <>
-      <GradientText text="Linkly" fontSize="37px" />
+      <InputBar />
     </>
   );
 }
