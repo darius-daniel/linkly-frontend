@@ -28,3 +28,15 @@
 .text-black {
     color: #0B101B;
 }
+
+.hero-input .text-embed {
+    position: relative;
+    top: 46px;
+    right: 280px;
+}
+
+.header-input .text-embed {
+    position: relative;
+    top: 46px;
+    right: 380px;
+}

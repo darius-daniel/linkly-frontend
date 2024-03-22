@@ -1,0 +1,26 @@
+.hero-input, .header-input {
+    margin: auto;
+    box-sizing: border-box;
+}
+
+#link-input {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 70px;
+    border: 3px solid #353C4A;
+    border-radius: 35px;
+    font-size: 16px;
+    font-weight: lighter;
+    box-sizing: border-box;
+}
+
+.hero-input {
+    width: 50%;
+}
+
+.header-input {
+    width: 65%;
+    position: relative;
+    bottom: 2em;
+}

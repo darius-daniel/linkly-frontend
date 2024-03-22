@@ -1,5 +1,4 @@
-import GradientTextProps from '../utils/interfaces';
-import './styles/Text.css';
+import { GradientTextProps } from '../utils/interfaces';
 
 export default function GradientText({ text, fontSize }: GradientTextProps) {
   const styles = {

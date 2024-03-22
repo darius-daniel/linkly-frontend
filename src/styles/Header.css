@@ -1,0 +1,15 @@
+.guest-header {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 6em;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.user-header {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    justify-content: space-between;
+}

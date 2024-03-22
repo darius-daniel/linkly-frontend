@@ -1,9 +1,8 @@
-import './styles/Buttons.css';
-import './styles/InputBar.css';
+import { BarProps } from '../utils/interfaces';
 
-export default function InputBar() {
+export default function InputBar({ className }: BarProps) {
   return (
-    <form action="" className="input-bar">
+    <form action="" className={className}>
       <svg
         width="26"
         height="19"

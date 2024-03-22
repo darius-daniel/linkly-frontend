@@ -2,7 +2,6 @@ import { useState } from 'react';
 import GradientText from './GradientText';
 import InputBar from './InputBar';
 import LinkTable from './LinkTable';
-import './styles/Main.css';
 
 export default function Main() {
   const [remainder, setRemainder] = useState<number>(9);
@@ -17,7 +16,7 @@ export default function Main() {
           <br /> your online experience
         </p>
         <div className="centered">
-          <InputBar />
+          <InputBar className="hero-input" />
         </div>
         <p className="p2 text-lite">
           You can create <span className="text-primary-pink">0{remainder}</span>{' '}

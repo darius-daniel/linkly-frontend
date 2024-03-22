@@ -1,5 +1,3 @@
-import './styles/LinkTable.css';
-
 export default function LinkTable() {
   const tableHeaders: Array<string> = [
     'Short Link',

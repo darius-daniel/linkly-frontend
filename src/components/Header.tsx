@@ -1,8 +1,6 @@
 import GradientText from './GradientText';
 import SignInButton from './SignInButton';
 import SignUpButton from './SignUpButton';
-import './styles/Header.css';
-import './styles/Buttons.css';
 
 export default function Header() {
   return (

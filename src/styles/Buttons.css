@@ -12,11 +12,11 @@
 }
 
 .btn-primary:hover {
-    background-color: #0041e6;
+    background-color: rgba(20, 78, 227, 0.5);
 }
 
 .btn-secondary {
-    background-color: #181E29;
+    background-color: rgba(24, 30, 51, 0.5);
     color: #FFF;
 }
 
@@ -30,4 +30,16 @@
 
 .btn-shadow {
     box-shadow: 10px 5px 5px rgba(20, 78, 227, 0.4);
+}
+
+.hero-input .btn-embed {
+    position: relative;
+    bottom: 57px;
+    left: 234px
+}
+
+.header-input .btn-embed {
+    position: relative;
+    bottom: 57px;
+    left: 330px
 }
