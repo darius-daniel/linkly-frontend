@@ -2,7 +2,7 @@ import { NotificationProps } from '../utils/interfaces';
 
 export default function Notifications({ number }: NotificationProps) {
   return (
-    <span className="bg-primary-blue text-white notifications">
+    <span className="bg-primary-blue text-white text-bold notifications">
       <svg
         width="16"
         height="16"

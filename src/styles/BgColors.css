@@ -6,6 +6,10 @@
     background-color: #EB568E;
 }
 
+.bg-secondary {
+    background-color: rgba(24, 30, 51, 0.5);
+}
+
 .bg-lite {
     background-color: #C9CED6;
 }

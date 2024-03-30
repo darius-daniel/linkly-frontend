@@ -1,7 +1,6 @@
 import GradientText from './components/GradientText';
 import InputBar from './components/InputBar';
 import Notifications from './components/Notifications';
-import SignInButton from './components/SignInButton';
 
 function App() {
   return (
@@ -10,7 +9,10 @@ function App() {
         <GradientText text="Linkly" fontSize="37px" />
         <InputBar className="header-input" />
         <div>
-          <SignInButton />
+          <select name="" id="account-info" className="bg-grey text-white">
+            <option value="">Welcome Darius</option>
+            <option value="log-out">Log out</option>
+          </select>
           <Notifications number={2} />
         </div>
       </header>

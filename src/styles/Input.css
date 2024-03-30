@@ -24,3 +24,53 @@
     position: relative;
     bottom: 2em;
 }
+
+select {
+    padding: 21px 25px;
+    border-radius: 50px;
+    border: none;
+}
+
+label {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+.user-form {
+    text-align: left;
+    width: 30%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 1em;
+    border: 3px solid #EB568E;
+    border-radius: 25px;
+}
+
+.form-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pwd, .usr {
+    display: block;
+    box-sizing: border-box;
+}
+
+.usr, .pwd {
+    width: 100%;
+    margin-left: 0;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid #181E29;
+}
+
+.usr {
+    margin-bottom: 15px;
+}
+
+.pwd {
+    margin-bottom: 20px;
+}

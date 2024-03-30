@@ -32,14 +32,15 @@
     box-shadow: 10px 5px 5px rgba(20, 78, 227, 0.4);
 }
 
-.hero-input .btn-embed {
+.btn-embed {
     position: relative;
     bottom: 57px;
-    left: 234px
+}
+
+.hero-input .btn-embed {
+    left: 235px
 }
 
 .header-input .btn-embed {
-    position: relative;
-    bottom: 57px;
-    left: 330px
+    left: 334px
 }

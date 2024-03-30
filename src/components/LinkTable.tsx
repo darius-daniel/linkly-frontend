@@ -69,11 +69,13 @@ export default function LinkTable() {
   return (
     <table className="link-table">
       <thead>
-        {tableHeaders.map((colHead, idx) => (
-          <th scope="col" key={idx} className="text-lite">
-            {colHead}
-          </th>
-        ))}
+        <tr className="text-lite">
+          {tableHeaders.map((colHead, idx) => (
+            <th scope="col" key={idx} className="text-lite">
+              {colHead}
+            </th>
+          ))}
+        </tr>
       </thead>
       <tbody>
         {testData.map((data, idx) => {

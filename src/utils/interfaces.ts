@@ -10,3 +10,10 @@ export interface BarProps {
 export interface NotificationProps {
   number: number
 }
+
+export interface RouteError {
+  statusText: string;
+  error: {
+    message: string;
+  }
+}

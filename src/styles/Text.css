@@ -29,14 +29,44 @@
     color: #0B101B;
 }
 
-.hero-input .text-embed {
+.text-bold {
+    font-weight: bold;
+}
+
+.text-bolder {
+    font-weight: bolder;
+}
+
+.text-embed {
     position: relative;
     top: 46px;
+}
+
+.hero-input .text-embed {
     right: 280px;
 }
 
 .header-input .text-embed {
-    position: relative;
-    top: 46px;
     right: 380px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.options {
+    display: inline-block;
+    justify-content: right;
+    box-sizing: border-box;
+    padding-top: 15px;
+    padding-right: 20px;
+}
+
+.options a {
+    margin-left: 145px;
+    font-size: 16px;
+}
+
+.options:hover a {
+    color: #144EE3;
 }

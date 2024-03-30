@@ -7,12 +7,15 @@ import InputBar from '../components/InputBar';
 import LinkTable from '../components/LinkTable';
 
 import '../styles/Header.css';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export default function GuestHome() {
   const [remainder, setRemainder] = useState<number>(9);
+  const navigate: NavigateFunction = useNavigate();
+
   return (
     <>
-      <header className="guest-header">
+      <header className="guest-header" onClick={() => navigate('/')}>
         <GradientText text="Linkly" fontSize="37px" />
         <div>
           <SignInButton />
@@ -32,8 +35,8 @@ export default function GuestHome() {
           </div>
           <p className="p2 text-lite">
             You can create{' '}
-            <span className="text-primary-pink">0{remainder}</span> more links.
-            Register now to enjoy unlimited usage.{' '}
+            <span className="text-primary-pink text-bold">0{remainder}</span>{' '}
+            more links. Register now to enjoy unlimited usage.{' '}
             <svg
               width="14"
               height="16"
