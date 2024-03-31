@@ -1,11 +1,12 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { useState, useEffect } from "react";
+import axiosInstance from './axiosInstance';
 
 export function usePost(url: string, data: any) {
   const [status, setStatus] = useState<number | null>(500)
 
   useEffect(() => {
-    axios
+    axiosInstance
       .post(url, data)
       .then((response: AxiosResponse) => {
         setStatus(response.status);
@@ -21,7 +22,7 @@ export function useFetch(url: string): any {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(url).then((response: AxiosResponse) => {
+    axiosInstance.get(url).then((response: AxiosResponse) => {
       setData(response.data);
     }).catch((error: Error) => {
       console.error(`Error: ${error.message}`);

@@ -1,27 +1,30 @@
 import { RefObject, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import GradientText from '../components/GradientText';
-import { usePost } from '../utils/hooks';
+import axiosInstance from '../utils/axiosInstance';
 
 export default function SignIn() {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
-  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const credentials = {
-      email: emailRef.current?.value,
-      password: pwdRef.current?.value,
-    };
-    usePost('/sign-in', credentials);
+    const email = emailRef.current ? emailRef.current.value : '';
+    const password = pwdRef.current ? pwdRef.current.value : '';
+
+    axiosInstance
+      .post('/sign-in', { email, password })
+      .then((response) => console.log(response.status))
+      .catch((error: Error) => console.error(error.message));
   };
 
   return (
     <>
-      <header onClick={() => navigate('/')}>
-        <GradientText text="Linkly" fontSize="37px" />
+      <header>
+        <Link to="/">
+          <GradientText text="Linkly" fontSize="37px" />
+        </Link>
       </header>
       <form onSubmit={handleSubmit} className="user-form bg-grey">
         <label className="text-gradient">Email:</label>
@@ -46,9 +49,12 @@ export default function SignIn() {
           <button type="submit" className="submit btn btn-primary btn-pill">
             Log In
           </button>
-          <a href="/" aria-disabled={true} className="options">
+          <Link to="/sign-up" aria-disabled={true} className="options">
+            Sign Up
+          </Link>
+          <Link to="/" aria-disabled={true} className="options">
             Forgot password?
-          </a>
+          </Link>
         </div>
       </form>
     </>

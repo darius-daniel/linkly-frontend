@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import SignInButton from '../components/SignInButton';
 import SignUpButton from '../components/SignUpButton';
@@ -7,21 +8,22 @@ import InputBar from '../components/InputBar';
 import LinkTable from '../components/LinkTable';
 
 import '../styles/Header.css';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export default function GuestHome() {
   const [remainder, setRemainder] = useState<number>(9);
-  const navigate: NavigateFunction = useNavigate();
 
   return (
     <>
-      <header className="guest-header" onClick={() => navigate('/')}>
-        <GradientText text="Linkly" fontSize="37px" />
+      <header className="guest-header">
+        <Link to="/">
+          <GradientText text="Linkly" fontSize="37px" />
+        </Link>
         <div>
           <SignInButton />
           <SignUpButton />
         </div>
       </header>
+
       <section id="main">
         <div className="hero">
           <GradientText text="Shorten Your Looong Links :)" fontSize="60px" />

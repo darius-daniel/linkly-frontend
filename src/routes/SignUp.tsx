@@ -1,5 +1,5 @@
 import { RefObject, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import GradientText from '../components/GradientText';
 import { usePost } from '../utils/hooks';
@@ -8,7 +8,6 @@ export default function SignUp() {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
   const confirmPwdRef: RefObject<HTMLInputElement> = useRef(null);
-  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,8 +21,10 @@ export default function SignUp() {
 
   return (
     <>
-      <header onClick={() => navigate('/')}>
-        <GradientText text="Linkly" fontSize="37px" />
+      <header>
+        <Link to="/">
+          <GradientText text="Linkly" fontSize="37px" />
+        </Link>
       </header>
       <form
         onSubmit={(event) => handleSubmit(event)}
@@ -61,9 +62,9 @@ export default function SignUp() {
             Sign Up
           </button>
           <div className="options sign-up-options">
-            <a href="/sign-in" aria-disabled={true} className="text-lite">
+            <Link to="/sign-in" aria-disabled={true} className="text-lite">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       </form>
