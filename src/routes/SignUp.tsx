@@ -1,13 +1,33 @@
-import { RefObject, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { RefObject, useEffect, useRef, useState } from 'react';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
 import GradientText from '../components/GradientText';
-import { usePost } from '../utils/hooks';
+import { AxiosResponse } from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 
 export default function SignUp() {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
   const confirmPwdRef: RefObject<HTMLInputElement> = useRef(null);
+
+  const navigate: NavigateFunction = useNavigate();
+
+  const [matching, setMatching] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>('');
+  const [passwordRepeat, setPasswordRepeat] = useState<string>('');
+
+  useEffect(() => {
+    if (password === passwordRepeat) setMatching(true);
+    else setMatching(false);
+  }, [pwdRef.current?.value, confirmPwdRef.current?.value]);
+
+  const handleChange1 = () => {
+    if (pwdRef.current) setPassword(pwdRef.current.value);
+  };
+
+  const handleChange2 = () => {
+    if (confirmPwdRef.current) setPasswordRepeat(confirmPwdRef.current.value);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,8 +35,15 @@ export default function SignUp() {
       email: emailRef.current?.value,
       password: pwdRef.current?.value,
     };
-    console.log(credentials);
-    usePost('/sign-up', credentials);
+
+    axiosInstance
+      .post('/sign-up', credentials)
+      .then((response: AxiosResponse) => {
+        const { newUser } = response.data;
+        console.log(newUser);
+        if (response.status === 201) navigate(`/user/:${newUser.username}`);
+      })
+      .catch((error: Error) => console.error(error.message));
   };
 
   return (
@@ -47,6 +74,7 @@ export default function SignUp() {
           placeholder="password"
           required={true}
           ref={pwdRef}
+          onChange={handleChange1}
         />
         <label className="text-gradient">Confirm Password:</label>
         <input
@@ -56,9 +84,27 @@ export default function SignUp() {
           placeholder="confirm password"
           required={true}
           ref={confirmPwdRef}
+          onChange={handleChange2}
         />
+        {matching === false && (
+          <p
+            className="text-primary-pink text-bold"
+            style={{
+              marginTop: 0,
+              marginBottom: '5px',
+              paddingLeft: '0.5em',
+              fontSize: '12px',
+            }}
+          >
+            No match
+          </p>
+        )}
         <div className="form-controls">
-          <button type="submit" className="submit btn btn-primary btn-pill">
+          <button
+            type="submit"
+            className="submit btn btn-primary btn-pill"
+            disabled={matching === false}
+          >
             Sign Up
           </button>
           <div className="options sign-up-options">

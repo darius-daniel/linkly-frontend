@@ -1,5 +1,6 @@
 import { RefObject, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 import GradientText from '../components/GradientText';
 import axiosInstance from '../utils/axiosInstance';
@@ -7,6 +8,7 @@ import axiosInstance from '../utils/axiosInstance';
 export default function SignIn() {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
+  const navigate: NavigateFunction = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,8 +16,11 @@ export default function SignIn() {
     const password = pwdRef.current ? pwdRef.current.value : '';
 
     axiosInstance
-      .post('/sign-in', { email, password })
-      .then((response) => console.log(response.status))
+      .post('http://127.0.0.1:5000/sign-in', { email, password })
+      .then((response: AxiosResponse) => {
+        const { userId } = response.data;
+        navigate(`/user/${userId}`);
+      })
       .catch((error: Error) => console.error(error.message));
   };
 
@@ -45,6 +50,16 @@ export default function SignIn() {
           required={true}
           ref={pwdRef}
         />
+        <p
+          className="text-primary-pink text-bold"
+          style={{
+            marginBottom: '20px',
+            paddingLeft: '0.5em',
+            fontSize: '12px',
+          }}
+        >
+          Incorrect username or password
+        </p>
         <div className="form-controls">
           <button type="submit" className="submit btn btn-primary btn-pill">
             Log In
