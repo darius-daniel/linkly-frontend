@@ -8,7 +8,11 @@ import axiosInstance from '../utils/axiosInstance';
 export default function SignIn() {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
-  const navigate: NavigateFunction = useNavigate();
+  const [validated, setValidated] = useState<boolean>(true);
+
+  // const navigate: NavigateFunction = useNavigate(); 
+  const history = useHistory();
+
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
