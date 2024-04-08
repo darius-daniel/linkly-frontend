@@ -2,48 +2,59 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
 import GradientText from '../components/GradientText';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import axiosInstance from '../utils/axiosInstance';
 
 export default function SignUp() {
-  const emailRef: RefObject<HTMLInputElement> = useRef(null);
+  const userNameRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
   const confirmPwdRef: RefObject<HTMLInputElement> = useRef(null);
 
   const navigate: NavigateFunction = useNavigate();
 
   const [matching, setMatching] = useState<boolean>(true);
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordRepeat, setPasswordRepeat] = useState<string>('');
+  const [isAvailable, setAvailability] = useState<boolean>(true);
 
   useEffect(() => {
     if (password === passwordRepeat) setMatching(true);
     else setMatching(false);
   }, [pwdRef.current?.value, confirmPwdRef.current?.value]);
 
-  const handleChange1 = () => {
-    if (pwdRef.current) setPassword(pwdRef.current.value);
-  };
+  useEffect(() => {
+    if (username) {
+      axiosInstance
+        .post('/is_available', { username })
+        .then((response: AxiosResponse) => {
+          setAvailability(response.data);
+        })
+        .catch((error: AxiosError) => console.error(error.message));
+    }
+  }, [username]);
 
-  const handleChange2 = () => {
-    if (confirmPwdRef.current) setPasswordRepeat(confirmPwdRef.current.value);
+  const handleChange = (
+    refObj: RefObject<HTMLInputElement>,
+    stateHookSetter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    if (refObj.current) stateHookSetter(refObj.current.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const credentials = {
-      email: emailRef.current?.value,
-      password: pwdRef.current?.value,
-    };
+    const credentials = { username, password };
 
     axiosInstance
-      .post('/sign-up', credentials)
+      .post('/sign_up', credentials)
       .then((response: AxiosResponse) => {
-        const { newUser } = response.data;
-        console.log(newUser);
-        if (response.status === 201) navigate(`/user/:${newUser.username}`);
+        const { status } = response;
+        if (status === 201) navigate('/user');
       })
-      .catch((error: Error) => console.error(error.message));
+      .catch((error: AxiosError) => {
+        const { status } = error;
+        if (status === 403) setAvailability(false);
+      });
   };
 
   return (
@@ -57,15 +68,27 @@ export default function SignUp() {
         onSubmit={(event) => handleSubmit(event)}
         className="user-form bg-grey"
       >
-        <label className="text-gradient">Email:</label>
+        <label className="text-gradient">Username:</label>
         <input
-          type="email"
-          name="email"
+          type="input"
+          name="username"
           className="usr text-black bg-lite"
-          placeholder="example@email.com"
+          placeholder="username"
           required={true}
-          ref={emailRef}
+          ref={userNameRef}
+          onChange={() => handleChange(userNameRef, setUsername)}
         />
+        {isAvailable === false && (
+          <p
+            className="text-primary-pink text-bold"
+            style={{
+              fontSize: '12px',
+              marginBottom: '8px',
+            }}
+          >
+            Username is already taken
+          </p>
+        )}
         <label className="text-gradient">Password:</label>
         <input
           type="password"
@@ -74,7 +97,7 @@ export default function SignUp() {
           placeholder="password"
           required={true}
           ref={pwdRef}
-          onChange={handleChange1}
+          onChange={() => handleChange(pwdRef, setPassword)}
         />
         <label className="text-gradient">Confirm Password:</label>
         <input
@@ -84,31 +107,30 @@ export default function SignUp() {
           placeholder="confirm password"
           required={true}
           ref={confirmPwdRef}
-          onChange={handleChange2}
+          onChange={() => handleChange(confirmPwdRef, setPasswordRepeat)}
         />
         {matching === false && (
           <p
             className="text-primary-pink text-bold"
             style={{
-              marginTop: 0,
-              marginBottom: '5px',
+              marginBottom: '8px',
               paddingLeft: '0.5em',
               fontSize: '12px',
             }}
           >
-            No match
+            Password fields do not match
           </p>
         )}
         <div className="form-controls">
           <button
             type="submit"
             className="submit btn btn-primary btn-pill"
-            disabled={matching === false}
+            disabled={!isAvailable || !matching}
           >
             Sign Up
           </button>
           <div className="options sign-up-options">
-            <Link to="/sign-in" aria-disabled={true} className="text-lite">
+            <Link to="/sign_in" aria-disabled={true} className="text-lite">
               Sign in
             </Link>
           </div>

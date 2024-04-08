@@ -7,7 +7,7 @@ export default function SignUpButton() {
     <button
       type="button"
       className="btn btn-primary btn-pill btn-shadow"
-      onClick={() => navigate('/sign-up')}
+      onClick={() => navigate('/sign_up')}
     >
       Register Now
     </button>

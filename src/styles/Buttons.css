@@ -7,20 +7,22 @@
 }
 
 .btn-primary {
-    background-color: #144EE3;
-    color: #FFF;
+    background-color: #144ee3;
+    color: #fff;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:disabled {
     background-color: rgba(20, 78, 227, 0.5);
 }
 
 .btn-secondary {
     background-color: rgba(24, 30, 51, 0.5);
-    color: #FFF;
+    color: #fff;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:disabled {
     background-color: #202531;
 }
 
@@ -38,9 +40,9 @@
 }
 
 .hero-input .btn-embed {
-    left: 235px
+    left: 235px;
 }
 
 .header-input .btn-embed {
-    left: 334px
+    left: 332px;
 }

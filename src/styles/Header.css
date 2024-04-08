@@ -2,13 +2,15 @@ header {
     display: flex;
     width: 100%;
     padding: 0;
+    margin: 0;
 }
 
-.guest-header, .user-header {
+.guest-header,
+.user-header {
     justify-content: space-between;
 }
 
-.guest-header {  
+.guest-header {
     margin: auto;
     margin-bottom: 6em;
 }

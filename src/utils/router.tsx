@@ -7,11 +7,14 @@ import SignUp from '../routes/SignUp';
 import UserHome from '../routes/UserHome';
 
 const router = createBrowserRouter([
-  { path: '/', element: <GuestHome />, errorElement: <ErrorPage /> },
-  { path: '/sign-in', element: <SignIn /> },
-  { path: '/sign-up', element: <SignUp /> },
-  { path: 'user/:userId', element: <UserHome /> },
-  // { path: '/user/:userId', element: <User userId={userId} /> },
+  {
+    path: '/',
+    element: <GuestHome />,
+    errorElement: <ErrorPage />,
+  },
+  { path: '/sign_in', element: <SignIn /> },
+  { path: '/sign_up', element: <SignUp /> },
+  { path: '/user/:userName', element: <UserHome /> },
 ]);
 
 export default router;

@@ -13,8 +13,26 @@
     margin-bottom: 3em;
 }
 
-.notifications {
-    padding: 20px 17px;
-    border-radius: 100%;
-    font-size: 16px;
+.nametag {
+    display: inline-block;
+    border-radius: 5em;
+    margin-right: 0.5em;
+    margin-top: -0.4em;
+    padding: 13px 32px;
+    box-sizing: border-box;
+    width: 191px;
+    height: 68px;
+    text-align: left;
+}
+
+.nametag h1 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0
+}
+
+.nametag p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
 }

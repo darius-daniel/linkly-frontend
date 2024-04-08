@@ -1,31 +1,33 @@
-import { RefObject, useRef } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
-import GradientText from '../components/GradientText';
 import axiosInstance from '../utils/axiosInstance';
+import GradientText from '../components/GradientText';
 
 export default function SignIn() {
-  const emailRef: RefObject<HTMLInputElement> = useRef(null);
+  const userNameRef: RefObject<HTMLInputElement> = useRef(null);
   const pwdRef: RefObject<HTMLInputElement> = useRef(null);
-  const [validated, setValidated] = useState<boolean>(true);
+  const navigate: NavigateFunction = useNavigate();
 
-  // const navigate: NavigateFunction = useNavigate(); 
-  const history = useHistory();
-
+  const [validated, setValidated] = useState<boolean>(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const email = emailRef.current ? emailRef.current.value : '';
+    const username = userNameRef.current ? userNameRef.current.value : '';
     const password = pwdRef.current ? pwdRef.current.value : '';
 
     axiosInstance
-      .post('http://127.0.0.1:5000/sign-in', { email, password })
+      .post('http://127.0.0.1:5000/sign_in', { username, password })
       .then((response: AxiosResponse) => {
-        const { userId } = response.data;
-        navigate(`/user/${userId}`);
+        const { data } = response;
+        setValidated(true);
+        navigate(`/user/${data.username}`);
       })
-      .catch((error: Error) => console.error(error.message));
+      .catch((error: AxiosError) => {
+        const { response } = error;
+        if (response?.status === 404) setValidated(false);
+      });
   };
 
   return (
@@ -36,14 +38,14 @@ export default function SignIn() {
         </Link>
       </header>
       <form onSubmit={handleSubmit} className="user-form bg-grey">
-        <label className="text-gradient">Email:</label>
+        <label className="text-gradient">Username:</label>
         <input
-          type="email"
-          name="email"
+          type="input"
+          name="username"
           className="usr text-black bg-lite"
-          placeholder="example@email.com"
+          placeholder="username"
           required={true}
-          ref={emailRef}
+          ref={userNameRef}
         />
         <label className="text-gradient">Password:</label>
         <input
@@ -54,21 +56,23 @@ export default function SignIn() {
           required={true}
           ref={pwdRef}
         />
-        <p
-          className="text-primary-pink text-bold"
-          style={{
-            marginBottom: '20px',
-            paddingLeft: '0.5em',
-            fontSize: '12px',
-          }}
-        >
-          Incorrect username or password
-        </p>
+        {validated === false && (
+          <p
+            className="text-primary-pink text-bold"
+            style={{
+              marginBottom: '8px',
+              paddingLeft: '0.5em',
+              fontSize: '12px',
+            }}
+          >
+            Incorrect password
+          </p>
+        )}
         <div className="form-controls">
           <button type="submit" className="submit btn btn-primary btn-pill">
             Log In
           </button>
-          <Link to="/sign-up" aria-disabled={true} className="options">
+          <Link to="/sign_up" aria-disabled={true} className="options">
             Sign Up
           </Link>
           <Link to="/" aria-disabled={true} className="options">

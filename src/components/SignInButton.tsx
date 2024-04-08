@@ -12,7 +12,7 @@ export default function SignInButton() {
         paddingRight: '50px',
         marginRight: '20px',
       }}
-      onClick={() => navigate('/sign-in')}
+      onClick={() => navigate('/sign_in')}
     >
       Login{' '}
       <svg
