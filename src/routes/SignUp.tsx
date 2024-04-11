@@ -36,7 +36,7 @@ export default function SignUp() {
 
   const handleChange = (
     refObj: RefObject<HTMLInputElement>,
-    stateHookSetter: React.Dispatch<React.SetStateAction<string>>
+    stateHookSetter: React.Dispatch<React.SetStateAction<string>>,
   ) => {
     if (refObj.current) stateHookSetter(refObj.current.value);
   };
@@ -48,8 +48,8 @@ export default function SignUp() {
     axiosInstance
       .post('/sign_up', credentials)
       .then((response: AxiosResponse) => {
-        const { status } = response;
-        if (status === 201) navigate('/user');
+        const { id: userId } = response.data;
+        navigate(`/user/${userId}`);
       })
       .catch((error: AxiosError) => {
         const { status } = error;

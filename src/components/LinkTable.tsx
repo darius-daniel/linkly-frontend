@@ -1,71 +1,13 @@
-export default function LinkTable() {
+import { LinkTableProps } from '../utils/interfaces';
+
+export default function LinkTable({ links }: LinkTableProps) {
   const tableHeaders: Array<string> = [
     'Short Link',
     'Original Link',
     'Clicks',
     'Date',
   ];
-  const testData: Array<{
-    short: string;
-    long: string;
-    clicks: number;
-    date: string;
-  }> = [
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-    {
-      short: 'https://linkly.com/Bn41aCOlnxj',
-      long: 'https://www.twitter.com/tweets/8erelCoihu/',
-      clicks: 1313,
-      date: 'Oct-10-2023',
-    },
-  ];
+
   return (
     <table className="link-table">
       <thead>
@@ -78,12 +20,13 @@ export default function LinkTable() {
         </tr>
       </thead>
       <tbody>
-        {testData.map((data, idx) => {
-          const { short, long, clicks, date } = data;
+        {links.map((data, idx) => {
+          const { shortUrl, longUrl, clicks, created_at } = data;
+          const date = `${created_at.getDate()}-${created_at.getMonth()}-${created_at.getFullYear()}`;
           return (
             <tr key={idx} className="text-lite">
-              <td>{short}</td>
-              <td>{long}</td>
+              <td>{shortUrl}</td>
+              <td>{longUrl}</td>
               <td>{clicks}</td>
               <td>{date}</td>
             </tr>

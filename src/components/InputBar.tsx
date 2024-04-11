@@ -1,8 +1,41 @@
+import { RefObject, useRef, useState } from 'react';
+import axiosInstance from '../utils/axiosInstance';
 import { BarProps } from '../utils/interfaces';
+import { AxiosError, AxiosResponse } from 'axios';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export default function InputBar({ className }: BarProps) {
+export default function InputBar({
+  className,
+  userId = undefined,
+  linkArrayUpdater,
+}: BarProps) {
+  const longUrlRef: RefObject<HTMLInputElement> = useRef(null);
+  const [longUrl, setLongUrl] = useState<string | undefined>(undefined);
+  const navigate: NavigateFunction = useNavigate();
+
+  const handleChange = () => setLongUrl(longUrlRef.current?.value);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (userId) {
+      const url: string = `/${userId}`;
+
+      axiosInstance
+        .post(url, { longUrl })
+        .then((response: AxiosResponse) => {
+          const link = response.data;
+          linkArrayUpdater((prev) => {
+            prev.push(link);
+            return prev;
+          });
+        })
+        .catch((error: AxiosError) => console.log(error.message));
+    } else navigate('/sign_up');
+  };
+
   return (
-    <form action="" className={className}>
+    <form onSubmit={handleSubmit} className={className}>
       <svg
         width="26"
         height="19"
@@ -22,8 +55,14 @@ export default function InputBar({ className }: BarProps) {
         name=""
         id="link-input"
         placeholder="Enter the link here"
+        ref={longUrlRef}
+        onChange={handleChange}
       />
-      <button type="submit" className="btn btn-primary btn-pill btn-embed">
+      <button
+        type="submit"
+        className="btn btn-primary btn-pill btn-embed"
+        disabled={!longUrl}
+      >
         Shorten Now!
       </button>
     </form>

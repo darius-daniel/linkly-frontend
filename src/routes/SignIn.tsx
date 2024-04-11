@@ -11,23 +11,32 @@ export default function SignIn() {
   const navigate: NavigateFunction = useNavigate();
 
   const [validated, setValidated] = useState<boolean>(false);
+  const [message, setMessage] = useState<null | string>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const username = userNameRef.current ? userNameRef.current.value : '';
-    const password = pwdRef.current ? pwdRef.current.value : '';
 
-    axiosInstance
-      .post('http://127.0.0.1:5000/sign_in', { username, password })
-      .then((response: AxiosResponse) => {
-        const { data } = response;
-        setValidated(true);
-        navigate(`/user/${data.username}`);
-      })
-      .catch((error: AxiosError) => {
-        const { response } = error;
-        if (response?.status === 404) setValidated(false);
-      });
+    if (userNameRef.current && pwdRef.current) {
+      const credentials = {
+        username: userNameRef.current.value,
+        password: pwdRef.current.value
+      }
+
+      axiosInstance
+        .post('http://127.0.0.1:5000/sign_in', credentials)
+        .then((response: AxiosResponse) => {
+          const { id: userId } = response.data;
+          setValidated(true);
+          navigate(`/user/${userId}`);
+        })
+        .catch((error: AxiosError) => {
+          setValidated(false);
+
+          const { response } = error;
+          if (response?.status === 401) setMessage('Incorrect password');
+          else if (response?.status === 404) setMessage('User does not exist');
+        });
+    }
   };
 
   return (
@@ -65,7 +74,7 @@ export default function SignIn() {
               fontSize: '12px',
             }}
           >
-            Incorrect password
+            {message}
           </p>
         )}
         <div className="form-controls">

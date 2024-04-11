@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SignInButton from '../components/SignInButton';
@@ -7,10 +7,17 @@ import GradientText from '../components/GradientText';
 import InputBar from '../components/InputBar';
 import LinkTable from '../components/LinkTable';
 
+import { Links } from '../utils/interfaces';
+
 import '../styles/Header.css';
 
 export default function GuestHome() {
-  const [remainder, setRemainder] = useState<number>(9);
+  const [remainder, setRemainder] = useState<number>(20);
+  const [links, setLinks] = useState<[] | Array<Links>>([]);
+
+  useEffect(() => {
+    setRemainder((prev) => prev - 1);
+  }, [links]);
 
   return (
     <>
@@ -33,7 +40,11 @@ export default function GuestHome() {
             <br /> your online experience
           </p>
           <div className="centered">
-            <InputBar className="hero-input" />
+            <InputBar
+              className="hero-input"
+              userId={undefined}
+              linkArrayUpdater={setLinks}
+            />
           </div>
           <p className="p2 text-lite">
             You can create{' '}
@@ -53,7 +64,7 @@ export default function GuestHome() {
             </svg>
           </p>
         </div>
-        <LinkTable />
+        <LinkTable links={links} />
       </section>
     </>
   );
