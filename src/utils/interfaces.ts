@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import DateObject from 'react-date-object';
 
 export interface GradientTextProps {
   text: string;
@@ -8,7 +9,7 @@ export interface GradientTextProps {
 export interface BarProps {
   className: string;
   userId: string | undefined;
-  linkArrayUpdater: Dispatch<SetStateAction<Array<Links>>>;
+  linkArrayRefreshSetter: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface NotificationProps {
@@ -20,11 +21,11 @@ export interface NameTagProps {
 }
 
 export interface User {
-  userId: string;
+  id: string;
   username: string;
   password: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: DateObject;
+  updatedAt: DateObject;
 }
 
 export interface Links {
@@ -32,12 +33,12 @@ export interface Links {
   shortUrl: string;
   longUrl: string;
   clicks: number;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: DateObject;
+  updatedAt: DateObject;
 }
 
 export interface LinkTableProps {
-  links: Array<Links>;
+  userId: string | undefined;
 }
 
 export interface RouteError {

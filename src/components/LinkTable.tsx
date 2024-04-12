@@ -1,6 +1,28 @@
-import { LinkTableProps } from '../utils/interfaces';
+import { useState } from 'react';
+import DateObject from 'react-date-object';
+import { AxiosError, AxiosResponse } from 'axios';
 
-export default function LinkTable({ links }: LinkTableProps) {
+import axiosInstance from '../utils/axiosInstance';
+import { Links, LinkTableProps } from '../utils/interfaces';
+
+export default function LinkTable({ userId = undefined }: LinkTableProps) {
+  const [links, setLinks] = useState<Array<Links>>([
+    {
+      linkId: 'e996ef20-f827-11ee-abc6-2f5541a137ce',
+      shortUrl: 'https://linkly.com/8jdwe4yu',
+      longUrl: 'https:/npmjs.com/package/react-date-object',
+      clicks: 0,
+      createdAt: new DateObject(),
+      updatedAt: new DateObject(),
+    },
+  ]);
+  if (userId) {
+    axiosInstance
+      .get(`/getLinksByUserId/${userId}`)
+      .then((response: AxiosResponse) => setLinks(response.data))
+      .catch((error: AxiosError) => console.error(error.message));
+  }
+
   const tableHeaders: Array<string> = [
     'Short Link',
     'Original Link',
@@ -20,15 +42,15 @@ export default function LinkTable({ links }: LinkTableProps) {
         </tr>
       </thead>
       <tbody>
-        {links.map((data, idx) => {
-          const { shortUrl, longUrl, clicks, created_at } = data;
-          const date = `${created_at.getDate()}-${created_at.getMonth()}-${created_at.getFullYear()}`;
+        {links.map((link: Links, idx: number) => {
+          const { shortUrl, longUrl, clicks, createdAt } = link;
+          const creationDate = createdAt.toString().split('T')[0];
           return (
             <tr key={idx} className="text-lite">
               <td>{shortUrl}</td>
               <td>{longUrl}</td>
               <td>{clicks}</td>
-              <td>{date}</td>
+              <td>{creationDate}</td>
             </tr>
           );
         })}

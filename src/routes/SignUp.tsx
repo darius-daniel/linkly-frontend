@@ -26,7 +26,7 @@ export default function SignUp() {
   useEffect(() => {
     if (username) {
       axiosInstance
-        .post('/is_available', { username })
+        .get(`/getUserNameAvailabilty/${username}`)
         .then((response: AxiosResponse) => {
           setAvailability(response.data);
         })

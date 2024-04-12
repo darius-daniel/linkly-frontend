@@ -11,22 +11,25 @@ import LinkTable from '../components/LinkTable';
 import NameTag from '../components/NameTag';
 import axiosInstance from '../utils/axiosInstance';
 import { AxiosError, AxiosResponse } from 'axios';
-import { useState } from 'react';
-import { Links, User } from '../utils/interfaces';
+import { useEffect, useState } from 'react';
+import { User } from '../utils/interfaces';
 
 export default function UserHome() {
-  const { userId } = useParams();
   const [user, setUser] = useState<User | null>(null);
+  const [updateLinkArray, setUpdateLinkArray] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
-  const [links, setLinks] = useState<[] | Array<Links>>([])
+  const { userId } = useParams();
 
-  axiosInstance
-    .post('/get_user', { userId })
-    .then((response: AxiosResponse) => setUser(response.data))
-    .catch((error: AxiosError) => {
-      console.error(error.message);
-      navigate('/');
-    });
+  useEffect(() => {
+    axiosInstance
+      .get(`/getUserById/${userId}`)
+      .then((response: AxiosResponse) => setUser(response.data))
+      .catch((error: AxiosError) => {
+        console.log(error.message, 'User with userId not found');
+        navigate('/');
+      });
+    setUpdateLinkArray(false);
+  }, [updateLinkArray]);
 
   return (
     <>
@@ -34,11 +37,11 @@ export default function UserHome() {
         <Link to="/">
           <GradientText text="Linkly" fontSize="37px" />
         </Link>
-        <InputBar className="header-input" userId={userId} linkArrayUpdater={setLinks} />
+        <InputBar className="header-input" userId={userId} linkArrayRefreshSetter={setUpdateLinkArray} />
         <NameTag username={user ? user.username : ''} />
       </header>
       <h1 className="text-white text-bold">History</h1>
-      <LinkTable links={links} />
+      <LinkTable userId={userId} />
     </>
   );
 }

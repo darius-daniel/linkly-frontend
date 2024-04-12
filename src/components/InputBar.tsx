@@ -1,13 +1,14 @@
+import { AxiosResponse } from 'axios';
 import { RefObject, useRef, useState } from 'react';
-import axiosInstance from '../utils/axiosInstance';
-import { BarProps } from '../utils/interfaces';
-import { AxiosError, AxiosResponse } from 'axios';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+
+import { BarProps } from '../utils/interfaces';
+import axiosInstance from '../utils/axiosInstance';
 
 export default function InputBar({
   className,
   userId = undefined,
-  linkArrayUpdater,
+  linkArrayRefreshSetter,
 }: BarProps) {
   const longUrlRef: RefObject<HTMLInputElement> = useRef(null);
   const [longUrl, setLongUrl] = useState<string | undefined>(undefined);
@@ -17,21 +18,13 @@ export default function InputBar({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (userId) {
-      const url: string = `/${userId}`;
-
+    if (userId === undefined) navigate('/sign_in');
+    else {
       axiosInstance
-        .post(url, { longUrl })
-        .then((response: AxiosResponse) => {
-          const link = response.data;
-          linkArrayUpdater((prev) => {
-            prev.push(link);
-            return prev;
-          });
-        })
-        .catch((error: AxiosError) => console.log(error.message));
-    } else navigate('/sign_up');
+        .post(`/createLinkForUser/${userId}`, { longUrl })
+        .then(() => linkArrayRefreshSetter(true))
+        .catch((error: AxiosResponse) => console.error(error.statusText));
+    }
   };
 
   return (
