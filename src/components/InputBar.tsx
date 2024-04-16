@@ -10,12 +10,11 @@ export default function InputBar({
   userId = undefined,
   linkArrayRefreshSetter,
 }: BarProps) {
+  const navigate: NavigateFunction = useNavigate();
   const longUrlRef: RefObject<HTMLInputElement> = useRef(null);
   const [longUrl, setLongUrl] = useState<string | undefined>(undefined);
-  const navigate: NavigateFunction = useNavigate();
 
   const handleChange = () => setLongUrl(longUrlRef.current?.value);
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (userId === undefined) navigate('/sign_in');

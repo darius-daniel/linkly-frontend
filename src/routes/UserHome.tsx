@@ -37,7 +37,11 @@ export default function UserHome() {
         <Link to="/">
           <GradientText text="Linkly" fontSize="37px" />
         </Link>
-        <InputBar className="header-input" userId={userId} linkArrayRefreshSetter={setUpdateLinkArray} />
+        <InputBar
+          className="header-input"
+          userId={userId}
+          linkArrayRefreshSetter={setUpdateLinkArray}
+        />
         <NameTag username={user ? user.username : ''} />
       </header>
       <h1 className="text-white text-bold">History</h1>

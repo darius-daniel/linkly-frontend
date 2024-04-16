@@ -36,7 +36,7 @@ export default function SignUp() {
 
   const handleChange = (
     refObj: RefObject<HTMLInputElement>,
-    stateHookSetter: React.Dispatch<React.SetStateAction<string>>,
+    stateHookSetter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     if (refObj.current) stateHookSetter(refObj.current.value);
   };

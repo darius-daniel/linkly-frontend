@@ -12,12 +12,7 @@ import { Links } from '../utils/interfaces';
 import '../styles/Header.css';
 
 export default function GuestHome() {
-  const [remainder, setRemainder] = useState<number>(20);
-  const [links, setLinks] = useState<[] | Array<Links>>([]);
-
-  useEffect(() => {
-    setRemainder((prev) => prev - 1);
-  }, [links]);
+  const [updateLinkArray, setUpdateLinkArray] = useState<boolean>(false);
 
   return (
     <>
@@ -43,12 +38,12 @@ export default function GuestHome() {
             <InputBar
               className="hero-input"
               userId={undefined}
-              linkArrayUpdater={setLinks}
+              linkArrayRefreshSetter={setUpdateLinkArray}
             />
           </div>
           <p className="p2 text-lite">
             You can create{' '}
-            <span className="text-primary-pink text-bold">0{remainder}</span>{' '}
+            <span className="text-primary-pink text-bold">05</span>{' '}
             more links. Register now to enjoy unlimited usage.{' '}
             <svg
               width="14"
@@ -64,7 +59,7 @@ export default function GuestHome() {
             </svg>
           </p>
         </div>
-        <LinkTable links={links} />
+        <LinkTable userId={undefined} />
       </section>
     </>
   );

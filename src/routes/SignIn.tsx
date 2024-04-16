@@ -19,8 +19,8 @@ export default function SignIn() {
     if (userNameRef.current && pwdRef.current) {
       const credentials = {
         username: userNameRef.current.value,
-        password: pwdRef.current.value
-      }
+        password: pwdRef.current.value,
+      };
 
       axiosInstance
         .post('http://127.0.0.1:5000/sign_in', credentials)

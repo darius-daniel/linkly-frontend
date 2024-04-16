@@ -47,7 +47,11 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
           const creationDate = createdAt.toString().split('T')[0];
           return (
             <tr key={idx} className="text-lite">
-              <td>{shortUrl}</td>
+              <td>
+                <a href={shortUrl} target="_blank">
+                  {shortUrl}
+                </a>
+              </td>
               <td>{longUrl}</td>
               <td>{clicks}</td>
               <td>{creationDate}</td>
