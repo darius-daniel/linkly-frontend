@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SignInButton from '../components/SignInButton';
@@ -7,13 +6,9 @@ import GradientText from '../components/GradientText';
 import InputBar from '../components/InputBar';
 import LinkTable from '../components/LinkTable';
 
-import { Links } from '../utils/interfaces';
-
 import '../styles/Header.css';
 
 export default function GuestHome() {
-  const [updateLinkArray, setUpdateLinkArray] = useState<boolean>(false);
-
   return (
     <>
       <header className="guest-header">
@@ -38,13 +33,13 @@ export default function GuestHome() {
             <InputBar
               className="hero-input"
               userId={undefined}
-              linkArrayRefreshSetter={setUpdateLinkArray}
+              linkArrayRefreshSetter={undefined}
             />
           </div>
           <p className="p2 text-lite">
             You can create{' '}
-            <span className="text-primary-pink text-bold">05</span>{' '}
-            more links. Register now to enjoy unlimited usage.{' '}
+            <span className="text-primary-pink text-bold">05</span> more links.
+            Register now to enjoy unlimited usage.{' '}
             <svg
               width="14"
               height="16"

@@ -21,7 +21,7 @@ export default function InputBar({
     else {
       axiosInstance
         .post(`/createLinkForUser/${userId}`, { longUrl })
-        .then(() => linkArrayRefreshSetter(true))
+        .then(() => linkArrayRefreshSetter && linkArrayRefreshSetter(true))
         .catch((error: AxiosResponse) => console.error(error.statusText));
     }
   };
