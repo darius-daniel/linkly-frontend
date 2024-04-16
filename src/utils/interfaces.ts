@@ -9,7 +9,7 @@ export interface GradientTextProps {
 export interface BarProps {
   className: string;
   userId: string | undefined;
-  linkArrayRefreshSetter: Dispatch<SetStateAction<boolean>>;
+  linkArrayRefreshSetter: Dispatch<SetStateAction<boolean>> | undefined;
 }
 
 export interface NotificationProps {

@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import GradientText from './GradientText';
 import InputBar from './InputBar';
 import LinkTable from './LinkTable';
 
 export default function Main() {
-  const [remainder, setRemainder] = useState<number>(9);
+  const remainder = 9;
 
   return (
     <section id="main">
@@ -16,7 +15,11 @@ export default function Main() {
           <br /> your online experience
         </p>
         <div className="centered">
-          <InputBar className="hero-input" />
+          <InputBar
+            className="hero-input"
+            userId={undefined}
+            linkArrayRefreshSetter={undefined}
+          />
         </div>
         <p className="p2 text-lite">
           You can create <span className="text-primary-pink">0{remainder}</span>{' '}
@@ -35,7 +38,7 @@ export default function Main() {
           </svg>
         </p>
       </div>
-      <LinkTable />
+      <LinkTable userId={undefined} />
     </section>
   );
 }
