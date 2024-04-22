@@ -23,7 +23,7 @@ export default function SignIn() {
       };
 
       axiosInstance
-        .post('http://127.0.0.1:5000/sign_in', credentials)
+        .post('/sign_in', credentials)
         .then((response: AxiosResponse) => {
           const { id: userId } = response.data;
           setValidated(true);
