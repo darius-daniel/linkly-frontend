@@ -52,7 +52,7 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
                   {shortUrl}
                 </a>
               </td>
-              <td>{longUrl}</td>
+              <td>{longUrl.slice(30)}</td>
               <td>{clicks}</td>
               <td>{creationDate}</td>
             </tr>
