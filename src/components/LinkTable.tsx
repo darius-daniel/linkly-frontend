@@ -4,6 +4,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import axiosInstance from '../utils/axiosInstance';
 import { Links, LinkTableProps } from '../utils/interfaces';
+import getFavicon from '../utils/getFavicon';
 
 export default function LinkTable({ userId = undefined }: LinkTableProps) {
   const [links, setLinks] = useState<Array<Links>>([
@@ -52,7 +53,14 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
                   {shortUrl}
                 </a>
               </td>
-              <td>{longUrl.slice(0, 45)}...</td>
+              <td>
+                <img
+                  alt="site favicon"
+                  src={getFavicon(longUrl)}
+                  style={{ height: '16px', width: '16px', margin: '10px 5px' }}
+                ></img>
+                {longUrl.slice(0, 45)}...
+              </td>
               <td>{clicks}</td>
               <td>{creationDate}</td>
             </tr>
