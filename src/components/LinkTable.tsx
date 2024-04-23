@@ -66,6 +66,8 @@ export default function LinkTable({
                     src={getFavicon(longUrl)}
                     style={{
                       display: 'inline-block',
+                      height: '32px',
+                      width: '32px',
                       margin: '5px',
                     }}
                   ></img>
