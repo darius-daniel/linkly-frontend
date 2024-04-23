@@ -60,16 +60,18 @@ export default function LinkTable({
                 </a>
               </td>
               <td>
-                <img
-                  alt="site favicon"
-                  src={getFavicon(longUrl)}
-                  style={{
-                    display: 'inline-block',
-                    height: '48px',
-                    width: '48px',
-                    margin: '5px',
-                  }}
-                ></img>
+                <span>
+                  <img
+                    alt="site favicon"
+                    src={getFavicon(longUrl)}
+                    style={{
+                      display: 'inline-block',
+                      height: '48px',
+                      width: '48px',
+                      margin: '5px',
+                    }}
+                  ></img>
+                </span>
                 {longUrl.slice(0, 25)}...
               </td>
               <td>{clicks}</td>
