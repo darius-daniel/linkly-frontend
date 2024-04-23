@@ -73,9 +73,11 @@ export default function InputBar({
             <p
               className="text-primary-pink text-bold"
               style={{
+                textAlign: 'left',
+                paddingLeft: '2.5em',
                 marginTop: '-40px',
                 paddingBottom: '16px',
-                fontSize: '16px',
+                fontSize: '14px',
               }}
             >
               Invalid URL
