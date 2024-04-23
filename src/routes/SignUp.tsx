@@ -24,14 +24,13 @@ export default function SignUp() {
   }, [pwdRef.current?.value, confirmPwdRef.current?.value]);
 
   useEffect(() => {
-    if (username) {
-      axiosInstance
-        .get(`/getUserNameAvailabilty/${username}`)
+    if (!username) return
+    axiosInstance
+        .get(`/getUserNameAvailability/${username}`)
         .then((response: AxiosResponse) => {
           setAvailability(response.data);
         })
         .catch((error: AxiosError) => console.error(error.message));
-    }
   }, [username]);
 
   const handleChange = (
