@@ -13,7 +13,7 @@ export default function InputBar({
   const navigate: NavigateFunction = useNavigate();
   const longUrlRef: RefObject<HTMLInputElement> = useRef(null);
   const [longUrl, setLongUrl] = useState<string | undefined>(undefined);
-  const [urlValidity, setUrlValidity] = useState<boolean>(true);
+  const [isValidUrl, setUrlValidity] = useState<boolean>(true);
 
   useEffect(() => {
     try {
@@ -64,20 +64,22 @@ export default function InputBar({
       <button
         type="submit"
         className="btn btn-primary btn-pill btn-embed"
-        disabled={!longUrl || !urlValidity}
+        disabled={!longUrl || !isValidUrl}
       >
         Shorten Now!
       </button>
-      {longUrl && urlValidity && (
+      {!isValidUrl && (
         <p
           className="text-primary-pink text-bold"
           style={{
-            marginBottom: '8px',
-            paddingLeft: '0.5em',
-            fontSize: '12px',
+            textAlign: 'left',
+            paddingTop: '0',
+            marginTop: '-40px',
+            paddingLeft: '2.5em',
+            fontSize: '14px',
           }}
         >
-          String is not a valid URL
+          Invalid URL
         </p>
       )}
     </form>
