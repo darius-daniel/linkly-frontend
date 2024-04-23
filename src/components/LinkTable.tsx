@@ -59,9 +59,9 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
                   src={getFavicon(longUrl)}
                   style={{
                     display: 'inline-block',
-                    height: '32px',
-                    width: '32px',
-                    margin: '10px 5px',
+                    height: '16px',
+                    width: '16px',
+                    margin: '5px',
                   }}
                 ></img>
                 {longUrl.slice(0, 45)}...
