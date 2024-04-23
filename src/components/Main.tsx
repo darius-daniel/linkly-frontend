@@ -38,7 +38,7 @@ export default function Main() {
           </svg>
         </p>
       </div>
-      <LinkTable userId={undefined} />
+      <LinkTable userId={undefined} shortUrlNumberGetter={undefined} />
     </section>
   );
 }

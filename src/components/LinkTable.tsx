@@ -25,7 +25,7 @@ export default function LinkTable({
       .get(`/getLinksByUserId/${userId}`)
       .then((response: AxiosResponse) => {
         setLinks(response.data);
-        shortUrlNumberGetter(links.length);
+        if (shortUrlNumberGetter) shortUrlNumberGetter(links.length);
       })
       .catch((error: AxiosError) => console.error(error.message));
   }
