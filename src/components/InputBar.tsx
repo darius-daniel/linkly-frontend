@@ -23,6 +23,7 @@ export default function InputBar({
         .post(`/createLinkForUser/${userId}`, { longUrl })
         .then(() => linkArrayRefreshSetter && linkArrayRefreshSetter(true))
         .catch((error: AxiosResponse) => console.error(error.statusText));
+      if (longUrlRef.current) longUrlRef.current.value = '';
     }
   };
 
