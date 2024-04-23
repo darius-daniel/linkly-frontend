@@ -56,7 +56,7 @@ export default function LinkTable({
             <tr key={idx} className="text-lite">
               <td>
                 <a href={shortUrl} target="_blank">
-                  {shortUrl}
+                  https://linkly.../{shortUrl.split('/')[1]}
                 </a>
               </td>
               <td>
@@ -66,8 +66,6 @@ export default function LinkTable({
                     src={getFavicon(longUrl)}
                     style={{
                       display: 'inline-block',
-                      height: '48px',
-                      width: '48px',
                       margin: '5px',
                     }}
                   ></img>
