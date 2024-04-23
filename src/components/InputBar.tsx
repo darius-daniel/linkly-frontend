@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import React, { RefObject, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 import { BarProps } from '../utils/interfaces';
@@ -13,6 +13,16 @@ export default function InputBar({
   const navigate: NavigateFunction = useNavigate();
   const longUrlRef: RefObject<HTMLInputElement> = useRef(null);
   const [longUrl, setLongUrl] = useState<string | undefined>(undefined);
+  const [urlValidity, setUrlValidity] = useState<boolean>(true);
+
+  useEffect(() => {
+    try {
+      if (longUrlRef.current) new URL(longUrlRef.current.value);
+      setUrlValidity(true);
+    } catch (error) {
+      setUrlValidity(false);
+    }
+  }, [longUrl]);
 
   const handleChange = () => setLongUrl(longUrlRef.current?.value);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,10 +64,22 @@ export default function InputBar({
       <button
         type="submit"
         className="btn btn-primary btn-pill btn-embed"
-        disabled={!longUrl}
+        disabled={!longUrl || !urlValidity}
       >
         Shorten Now!
       </button>
+      {longUrl && urlValidity && (
+        <p
+          className="text-primary-pink text-bold"
+          style={{
+            marginBottom: '8px',
+            paddingLeft: '0.5em',
+            fontSize: '12px',
+          }}
+        >
+          String is not a valid URL
+        </p>
+      )}
     </form>
   );
 }
