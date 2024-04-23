@@ -39,6 +39,7 @@ export interface Links {
 
 export interface LinkTableProps {
   userId: string | undefined;
+  shortUrlNumberGetter: Dispatch<SetStateAction<number>>;
 }
 
 export interface RouteError {

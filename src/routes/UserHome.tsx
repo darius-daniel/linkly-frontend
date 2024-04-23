@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { User } from '../utils/interfaces';
 
 export default function UserHome() {
+  const [shortUrlNum, setShortUrlNum] = useState<number>(0);
   const [user, setUser] = useState<User | null>(null);
   const [updateLinkArray, setUpdateLinkArray] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
@@ -46,11 +47,11 @@ export default function UserHome() {
       </header>
       <h1
         className="text-white text-bold"
-        style={{ textAlign: 'left', fontSize: '18px' }}
+        style={{ textAlign: 'left', fontSize: '24px', marginBottom: '2em' }}
       >
-        History
+        History({shortUrlNum > 0 ? shortUrlNum : null})
       </h1>
-      <LinkTable userId={userId} />
+      <LinkTable userId={userId} shortUrlNumberGetter={setShortUrlNum} />
     </>
   );
 }

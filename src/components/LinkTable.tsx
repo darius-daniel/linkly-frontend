@@ -6,7 +6,10 @@ import axiosInstance from '../utils/axiosInstance';
 import { Links, LinkTableProps } from '../utils/interfaces';
 import getFavicon from '../utils/getFavicon';
 
-export default function LinkTable({ userId = undefined }: LinkTableProps) {
+export default function LinkTable({
+  userId = undefined,
+  shortUrlNumberGetter,
+}: LinkTableProps) {
   const [links, setLinks] = useState<Array<Links>>([
     {
       linkId: 'e996ef20-f827-11ee-abc6-2f5541a137ce',
@@ -20,7 +23,10 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
   if (userId) {
     axiosInstance
       .get(`/getLinksByUserId/${userId}`)
-      .then((response: AxiosResponse) => setLinks(response.data))
+      .then((response: AxiosResponse) => {
+        setLinks(response.data);
+        shortUrlNumberGetter(links.length);
+      })
       .catch((error: AxiosError) => console.error(error.message));
   }
 
@@ -64,7 +70,7 @@ export default function LinkTable({ userId = undefined }: LinkTableProps) {
                     margin: '5px',
                   }}
                 ></img>
-                {longUrl.slice(0, 45)}...
+                {longUrl.slice(0, 25)}...
               </td>
               <td>{clicks}</td>
               <td>{creationDate}</td>
