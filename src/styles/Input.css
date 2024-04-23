@@ -42,8 +42,7 @@ label {
 .user-form {
     text-align: left;
     width: 30%;
-    margin: auto;
-    margin-top: 1.5em;
+    margin: 1.5em auto auto;
     padding: 1em;
     border: 3px solid #eb568e;
     border-radius: 25px;
