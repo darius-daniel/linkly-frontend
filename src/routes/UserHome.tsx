@@ -44,7 +44,12 @@ export default function UserHome() {
         />
         <NameTag username={user ? user.username : ''} />
       </header>
-      <h1 className="text-white text-bold">History</h1>
+      <h1
+        className="text-white text-bold"
+        style={{ textAlign: 'left', fontSize: '18px' }}
+      >
+        History
+      </h1>
       <LinkTable userId={userId} />
     </>
   );

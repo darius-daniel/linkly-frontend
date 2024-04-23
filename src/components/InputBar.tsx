@@ -68,18 +68,20 @@ export default function InputBar({
       >
         Shorten Now!
       </button>
-      {longUrl && !isValidUrl && (
-        <p
-          className="text-primary-pink text-bold"
-          style={{
-            marginTop: '-40px',
-            paddingBottom: '16px',
-            fontSize: '16px',
-          }}
-        >
-          Invalid URL
-        </p>
-      )}
+      {longUrl
+        ? !isValidUrl && (
+            <p
+              className="text-primary-pink text-bold"
+              style={{
+                marginTop: '-40px',
+                paddingBottom: '16px',
+                fontSize: '16px',
+              }}
+            >
+              Invalid URL
+            </p>
+          )
+        : null}
     </form>
   );
 }
