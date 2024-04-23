@@ -8,7 +8,7 @@ import getFavicon from '../utils/getFavicon';
 
 export default function LinkTable({
   userId = undefined,
-  shortUrlNumberGetter,
+  shortUrlNumberGetter = undefined,
 }: LinkTableProps) {
   const [links, setLinks] = useState<Array<Links>>([
     {
