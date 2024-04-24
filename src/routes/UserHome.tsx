@@ -46,10 +46,10 @@ export default function UserHome() {
         <NameTag username={user ? user.username : ''} />
       </header>
       <h1
-        className="text-white text-bold"
-        style={{ textAlign: 'left', fontSize: '24px', marginBottom: '2em' }}
+        className="text-white"
+        style={{ textAlign: 'left', fontSize: '18px', marginBottom: '25px' }}
       >
-        History({shortUrlNum > 0 ? shortUrlNum : null})
+        History {shortUrlNum > 0 ? `(${shortUrlNum})` : null}
       </h1>
       <LinkTable userId={userId} shortUrlNumberGetter={setShortUrlNum} />
     </>

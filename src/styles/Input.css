@@ -17,11 +17,11 @@
 }
 
 .hero-input {
-    width: 50%;
+    width: 640px;
 }
 
 .header-input {
-    width: 65%;
+    width: 835px;
     position: relative;
     bottom: 2em;
 }
